@@ -31,7 +31,7 @@ public class Register {
 		act.moveToElement(driver.findElement(By.className("icon-question-sign"))).build().perform();;
 		String helpText = driver.findElement(By.className("tooltip")).getText();
 		
-		act.
+		
 
 		//tooltip
 		System.out.println("Help Text is : "+helpText);
