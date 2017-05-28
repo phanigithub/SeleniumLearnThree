@@ -33,7 +33,7 @@ public class Register {
 		
 		
 
-		//tooltip
+		//tooltip--
 		System.out.println("Help Text is : "+helpText);
 		
 		driver.findElement(By.className("btn-primary")).click();
