@@ -1,16 +1,27 @@
 package flipkart;
 
 import java.sql.Driver;
+import java.util.Date;
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SearchFlip {
 	
+	WebDriver driver;
+	 public SearchFlip(WebDriver driver) {
+		// TODO Auto-generated constructor stub
+		this.driver=driver;
+		System.out.println("IT's called");
+	}
 	
 	
 	@FindBy(how=How.NAME,using="q")
@@ -19,10 +30,24 @@ public class SearchFlip {
 	private List<WebElement> searchForEle;
 	@FindBy(how=How.LINK_TEXT,using="NEXT")
 	private WebElement nxtPage;
-	
+	@FindBy(how=How.XPATH,using="//section[.//div/text()='Ideal for Family Size']")//"//section[.//div/text()='Brand']")
+	private WebElement fltrsection_size;
+	@FindBy(how=How.XPATH,using="//section[.//div/text()='Type']")
+	private WebElement fltrsection_type;
+	@FindBy(how=How.XPATH,using="//section[.//div/text()='Capacity']")
+	private WebElement fltrsection_capacity;
+	@FindBy(how=How.XPATH,using="//section[.//div/text()='Discount']")
+	private WebElement fltrsection_discount;
+	@FindBy(how=How.XPATH,using="//section[.//span/text()='Sort By']")
+	private WebElement sortBy;
+			/*
+			//section[.//span/text()='Sort By']//li[text()='Popularity']
+			//li[../preceding-sibling::span//text()='Sort By'][text()='Popularity']
+*/
 	
 	protected void enterSearch(String searchtxt){
 		search.sendKeys(searchtxt);
+		search.sendKeys(Keys.ENTER);
 	}
 	protected void searchFor(String searchFor){
 		System.out.println("IN METHOD SEARCH FOR");
@@ -42,8 +67,9 @@ public class SearchFlip {
 			 if(isFound==false){
 				 System.out.println("Next Page");
 				 nxtPage.click();
+					
 				 try {
-					Thread.sleep(5000);
+					Thread.sleep(10000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -57,6 +83,32 @@ public class SearchFlip {
 		// TODO Auto-generated method stub
 		search.sendKeys(enter);
 		
+	}
+	protected void applyFilter(String Key,String Value){
+		System.out.println("Search Flip :::::: Start"+new Date().toString());
+		WebDriverWait wdw = new WebDriverWait(driver, 100);
+		wdw.until(ExpectedConditions.visibilityOf(fltrsection_size));
+		System.out.println("Search Flip :::::: End"+new Date().toString());
+		switch(Key){
+		case "SIZE":
+			System.out.println(fltrsection_size.getAttribute("class"));
+			System.out.println("V::"+Value);
+			System.out.println(fltrsection_size.findElements(By.xpath("//input[following-sibling::div/text()='Single']")).size());
+			
+			 fltrsection_size.findElement(By.xpath("//input[following-sibling::div/text()='"+Value+"']")).click();
+		case "TYPE":
+			fltrsection_type.findElement(By.xpath("//input[following-sibling::div/text()='"+Value+"']")).click();
+		case "CAPACITY":
+			fltrsection_capacity.findElement(By.xpath("//input[following-sibling::div/text()='"+Value+"']")).click();
+		case "DISCOUNT":
+			fltrsection_discount.findElement(By.xpath("//input[following-sibling::div/text()='"+Value+"']")).click();
+		default:
+			System.err.println("Wrong Filter applied Verify Key or Value");
+		}
+		
+	}
+	protected void sortBy(String Key){
+		sortBy.findElement(By.xpath("//li[text()='"+Key+"']")).click();
 	}
 	
 	
