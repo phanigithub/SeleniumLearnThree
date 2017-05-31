@@ -20,6 +20,7 @@ public class BookLowPriceProduct {
 		
 		driver.get("https://flipkart.com");
 		
+		driver.manage().window().maximize();
 		
 		SearchFlip searchFlip =  PageFactory.initElements(driver, SearchFlip.class);
 		searchFlip.enterSearch("Refrigerator");
@@ -27,7 +28,7 @@ public class BookLowPriceProduct {
 		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		System.out.println("End"+new Date().toString());
 		SearchFlip sf = PageFactory.initElements(driver, SearchFlip.class);
-		sf.applyFilter("SIZE", "Family of 3");
+		sf.applyFilter("SIZE", "Single");
 		sf.applyFilter("TYPE", "Single Door");
 		sf.applyFilter("CAPACITY", "80 - 170 L");
 		sf.applyFilter("DISCOUNT", "20% or More");

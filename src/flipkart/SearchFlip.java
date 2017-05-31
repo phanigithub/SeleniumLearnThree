@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -94,7 +95,23 @@ public class SearchFlip {
 			System.out.println(fltrsection_size.getAttribute("class"));
 			System.out.println("V::"+Value);
 			System.out.println(fltrsection_size.findElements(By.xpath("//input[following-sibling::div/text()='Single']")).size());
+			List<WebElement> lw = fltrsection_size.findElements(By.xpath("//input[following-sibling::div/text()='Single']"));
+			for (int i = 0; i < lw.size(); i++) {
+				System.out.println("----------------------------------------------------------");
+				System.out.println(lw.get(i).findElement(By.xpath("//following-sibling::div[position()=1]")).getText());
+				System.out.println("----------------------------------------------------------");
+			}
 			
+			System.out.println(fltrsection_size.findElement(By.xpath("//input[following-sibling::div/text()='Single']")).getLocation().x);
+			System.out.println(fltrsection_size.findElement(By.xpath("//input[following-sibling::div/text()='Single']")).getLocation().y);
+			System.out.println(fltrsection_size.findElement(By.xpath("//input[following-sibling::div/text()='Single']")).isDisplayed());
+			System.out.println(fltrsection_size.findElement(By.xpath("//input[following-sibling::div/text()='Single']")).isEnabled());
+			System.out.println(fltrsection_size.findElement(By.xpath("//input[following-sibling::div/text()='Single']")).isSelected());
+			highlightElement(fltrsection_size.findElement(By.xpath("//input[following-sibling::div/text()='Single']")));
+			System.out.println("//input[following-sibling::div/text()='"+Value+"']");
+			System.out.println("Search Flip > :::::: Start"+new Date().toString());
+			wdw.until(ExpectedConditions.visibilityOf( fltrsection_size.findElement(By.xpath("//input[following-sibling::div/text()='"+Value+"']"))));
+			System.out.println("Search Flip >:::::: End"+new Date().toString());
 			 fltrsection_size.findElement(By.xpath("//input[following-sibling::div/text()='"+Value+"']")).click();
 		case "TYPE":
 			fltrsection_type.findElement(By.xpath("//input[following-sibling::div/text()='"+Value+"']")).click();
@@ -109,6 +126,23 @@ public class SearchFlip {
 	}
 	protected void sortBy(String Key){
 		sortBy.findElement(By.xpath("//li[text()='"+Key+"']")).click();
+	}
+	public void highlightElement(WebElement element) {
+		
+		// Original in Python: https://gist.github.com/3086536
+		
+		String originalStyle = element.getAttribute("style");
+		
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].setAttribute('style', 'background: yellow; border: 2px solid red;');", element);
+		
+		try {
+			Thread.sleep(3000);
+		} 
+		catch (InterruptedException e) {}
+		
+		js.executeScript("arguments[0].setAttribute('style', '" + originalStyle + "');", element);
+		
 	}
 	
 	
