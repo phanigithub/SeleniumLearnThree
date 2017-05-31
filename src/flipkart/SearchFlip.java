@@ -92,33 +92,33 @@ public class SearchFlip {
 		System.out.println("Search Flip :::::: End"+new Date().toString());
 		switch(Key){
 		case "SIZE":
-			System.out.println(fltrsection_size.getAttribute("class"));
-			System.out.println("V::"+Value);
-			System.out.println(fltrsection_size.findElements(By.xpath("//input[following-sibling::div/text()='Single']")).size());
-			List<WebElement> lw = fltrsection_size.findElements(By.xpath("//input[following-sibling::div/text()='Single']"));
-			for (int i = 0; i < lw.size(); i++) {
-				System.out.println("----------------------------------------------------------");
-				System.out.println(lw.get(i).findElement(By.xpath("//following-sibling::div[position()=1]")).getText());
-				System.out.println("----------------------------------------------------------");
-			}
-			
-			System.out.println(fltrsection_size.findElement(By.xpath("//input[following-sibling::div/text()='Single']")).getLocation().x);
-			System.out.println(fltrsection_size.findElement(By.xpath("//input[following-sibling::div/text()='Single']")).getLocation().y);
-			System.out.println(fltrsection_size.findElement(By.xpath("//input[following-sibling::div/text()='Single']")).isDisplayed());
-			System.out.println(fltrsection_size.findElement(By.xpath("//input[following-sibling::div/text()='Single']")).isEnabled());
-			System.out.println(fltrsection_size.findElement(By.xpath("//input[following-sibling::div/text()='Single']")).isSelected());
-			highlightElement(fltrsection_size.findElement(By.xpath("//input[following-sibling::div/text()='Single']")));
-			System.out.println("//input[following-sibling::div/text()='"+Value+"']");
-			System.out.println("Search Flip > :::::: Start"+new Date().toString());
-			wdw.until(ExpectedConditions.visibilityOf( fltrsection_size.findElement(By.xpath("//input[following-sibling::div/text()='"+Value+"']"))));
-			System.out.println("Search Flip >:::::: End"+new Date().toString());
-			 fltrsection_size.findElement(By.xpath("//input[following-sibling::div/text()='"+Value+"']")).click();
+//			System.out.println(fltrsection_size.getAttribute("class"));
+//			System.out.println("V::"+Value);
+//			System.out.println(fltrsection_size.findElements(By.xpath("//input[following-sibling::div/text()='Single']")).size());
+//			List<WebElement> lw = fltrsection_size.findElements(By.xpath("//input[following-sibling::div/text()='Single']"));
+//			for (int i = 0; i < lw.size(); i++) {
+//				System.out.println("----------------------------------------------------------");
+//				System.out.println(lw.get(i).findElement(By.xpath("//following-sibling::div[position()=1]")).getText());
+//				System.out.println("----------------------------------------------------------");
+//			}
+//			
+//			System.out.println(fltrsection_size.findElement(By.xpath("//input[following-sibling::div/text()='Single']")).getLocation().x);
+//			System.out.println(fltrsection_size.findElement(By.xpath("//input[following-sibling::div/text()='Single']")).getLocation().y);
+//			System.out.println(fltrsection_size.findElement(By.xpath("//input[following-sibling::div/text()='Single']")).isDisplayed());
+//			System.out.println(fltrsection_size.findElement(By.xpath("//input[following-sibling::div/text()='Single']")).isEnabled());
+//			System.out.println(fltrsection_size.findElement(By.xpath("//input[following-sibling::div/text()='Single']")).isSelected());
+//			highlightElement(fltrsection_size.findElement(By.xpath("//input[following-sibling::div/text()='Single']")));
+//			System.out.println("//input[following-sibling::div/text()='"+Value+"']");
+//			System.out.println("Search Flip > :::::: Start"+new Date().toString());
+//			//wdw.until(ExpectedConditions.visibilityOf( fltrsection_size.findElement(By.xpath("//input[following-sibling::div/text()='"+Value+"']"))));
+//			System.out.println("Search Flip >:::::: End"+new Date().toString());
+			 fltrsection_size.findElement(By.xpath("//input[following-sibling::div/text()='"+Value+"']/following-sibling::div[position()=2]")).click();
 		case "TYPE":
-			fltrsection_type.findElement(By.xpath("//input[following-sibling::div/text()='"+Value+"']")).click();
+			fltrsection_type.findElement(By.xpath("//input[following-sibling::div/text()='"+Value+"']/following-sibling::div[position()=2]")).click();
 		case "CAPACITY":
-			fltrsection_capacity.findElement(By.xpath("//input[following-sibling::div/text()='"+Value+"']")).click();
+			fltrsection_capacity.findElement(By.xpath("//input[following-sibling::div/text()='"+Value+"']/following-sibling::div[position()=2]")).click();
 		case "DISCOUNT":
-			fltrsection_discount.findElement(By.xpath("//input[following-sibling::div/text()='"+Value+"']")).click();
+			fltrsection_discount.findElement(By.xpath("//input[following-sibling::div/text()='"+Value+"']/following-sibling::div[position()=2]")).click();
 		default:
 			System.err.println("Wrong Filter applied Verify Key or Value");
 		}

@@ -27,11 +27,18 @@ public class BookLowPriceProduct {
 		System.out.println("Start"+new Date().toString());
 		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		System.out.println("End"+new Date().toString());
+		try {
+			Thread.sleep(15000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		SearchFlip sf = PageFactory.initElements(driver, SearchFlip.class);
 		sf.applyFilter("SIZE", "Single");
 		sf.applyFilter("TYPE", "Single Door");
 		sf.applyFilter("CAPACITY", "80 - 170 L");
 		sf.applyFilter("DISCOUNT", "20% or More");
+		sf.sortBy("Popularity");
 		
 		
 		
